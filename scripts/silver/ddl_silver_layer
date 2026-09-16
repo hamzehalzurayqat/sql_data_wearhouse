@@ -1,3 +1,24 @@
+/*
+===============================================================================
+Script:      silver_ddl.sql
+Purpose:     Creates all tables in the [silver] schema, dropping them first if
+             they already exist. Run this to reset the DDL structure of the
+             silver layer before loading cleaned data from [bronze].
+Tables:      silver.crm_cust_info
+             silver.crm_prd_info
+             silver.crm_sales_details
+             silver.erp_loc_a101
+             silver.erp_cust_az12
+             silver.erp_px_cat_g1v2
+WARNING:     This script DROPS every silver table. All existing data in the
+             silver layer will be permanently lost. Re-run the load scripts
+             afterwards to repopulate.
+===============================================================================
+*/
+
+USE DataWarehouse;
+GO
+
 IF OBJECT_ID('silver.crm_cust_info', 'U') IS NOT NULL
     DROP TABLE silver.crm_cust_info;
 GO
@@ -85,4 +106,7 @@ CREATE TABLE silver.erp_px_cat_g1v2 (
 );
 GO
 
-
+PRINT '===============================================================';
+PRINT '            SILVER LAYER TABLES CREATED SUCCESSFULLY           ';
+PRINT '===============================================================';
+GO
