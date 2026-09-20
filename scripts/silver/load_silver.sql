@@ -54,10 +54,6 @@ ERROR HANDLING
     loaded tables populated and the remaining ones empty. Read the Messages
     output to see which step failed, fix it, and re-run the whole procedure.
 
-DEPLOYMENT
-    This file uses ALTER PROCEDURE, so the procedure must already exist. For a
-    first-time deployment, change ALTER to CREATE on the line below, run it
-    once, then change it back.
 ===============================================================================
 */
 
