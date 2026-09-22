@@ -1,0 +1,59 @@
+
+-- test the gold.dim_customer
+
+PRINT '===============================================================';
+PRINT '                 GOLD LAYER QUALITY CHECKS                   ';
+PRINT '===============================================================';
+PRINT '                      THE DIM_CUSTOMER                   ';
+PRINT '===============================================================';
+
+-- the duplicates 
+if exists( 
+	select [customer_id], count(*) 
+	from [DataWarehouse].[gold].[dim_customer]
+	group by [customer_id]
+	having count(*)> 1 )
+	print 'duplicates found'
+
+else
+	print 'no duplicates '
+
+-- the gender 
+if exists( select distinct gender from gold.dim_customer where gender not in ('Male','Female','n/a')) 
+
+	print 'unexpected values in gender'
+else 
+	print 'gender value are : (Male,Female,n/a)'
+
+
+PRINT '===============================================================';
+PRINT '                      THE PRODCUT                   ';
+PRINT '===============================================================';
+
+-- the duplicate in prduct key 
+if exists(
+    select prd_key, count(*)
+    FROM (
+    SELECT 
+        pn.prd_id,
+        pn.cat_id,
+        pn.prd_key,
+        pn.prd_nm,
+        pn.prd_cost,
+        pn.prd_line,
+        pn.prd_start_dt,
+        pn.prd_end_dt,
+        eg.cat,
+        eg.subcat,
+        eg.maintenance,
+        pn.dwh_create_date
+    FROM silver.crm_prd_info AS pn
+    left join silver.erp_px_cat_g1v2 as eg
+    on pn.cat_id = eg.id
+    where pn.prd_end_dt is null)t -- filter out all the historical data )
+    group by prd_key
+    having count(*) > 1 or prd_key is null)
+print 'duplicates or null found'
+
+else 
+    print 'no duplicates or null '
