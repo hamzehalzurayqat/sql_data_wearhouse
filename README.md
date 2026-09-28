@@ -197,3 +197,8 @@ Additional documentation is included in the `docs/` folder:
 - `docs/data_flow.png` — data flow diagram
 - `docs/data intgration.png` — integration overview
 
+## Exploratory Data Analysis (EDA)
+After building the Gold layer, run `EDA/EDA.sql` to explore the data:
+dimensions, date ranges, key measures, magnitude analysis and rankings.
+The findings are summarized in `docs/eda_report.md`.
+
