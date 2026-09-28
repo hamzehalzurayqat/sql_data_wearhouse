@@ -461,5 +461,14 @@ group by dc.customer_key, dc.first_name
 5. **All 18,484 customers have ordered**, with about 1.5 orders per customer and about 1,061 revenue per order.
 6. **The data covers Dec 2010 to Jan 2014**, roughly 3 years of sales.
 
-## 8. EDA code 
-you can find the sql query that generate this report in EDA
+
+## 8. EDA Code
+
+The SQL queries that generate this report can be found in the project repository at:
+
+```
+sql_data_wearhouse/EDA/EDA.sql
+```
+
+Run the script against the Gold layer (`gold.dim_customer`, `gold.dim_prodcut`, `gold.fact_sales`) after the Bronze, Silver and Gold steps from Part 1 are complete.
+
